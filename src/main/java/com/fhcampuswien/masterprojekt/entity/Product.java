@@ -11,14 +11,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Products {
+public class Product {
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
     private Long productId;
 
     @Column(nullable = false)
-    private String productname;
+    private String productName;
 
     @Column(nullable = false)
     private String productDescription;

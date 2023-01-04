@@ -1,6 +1,6 @@
 package com.fhcampuswien.masterprojekt.service;
 
-import com.fhcampuswien.masterprojekt.entity.Products;
+import com.fhcampuswien.masterprojekt.entity.Product;
 import com.fhcampuswien.masterprojekt.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Products findById(Long id) {
+    public Product findById(Long id) {
         if(checkIfProductExists(id)) {
             return this.productRepository.findById(id).get();
         }
@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     public boolean checkIfProductExists(Long id) {
-        Optional<Products> product = this.productRepository.findById(id);
+        Optional<Product> product = this.productRepository.findById(id);
         return product.isPresent();
     }
 }

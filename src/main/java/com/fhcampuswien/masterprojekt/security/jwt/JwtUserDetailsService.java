@@ -17,7 +17,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.fhcampuswien.masterprojekt.entity.User user = userService.getMitarbeiterByUsername(username);
+        com.fhcampuswien.masterprojekt.entity.User user = userService.getUserByUsername(username);
         return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
