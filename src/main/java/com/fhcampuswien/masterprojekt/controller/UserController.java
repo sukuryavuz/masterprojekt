@@ -42,9 +42,15 @@ public class UserController {
         userService.removeUser(id);
     }
 
-    @PostMapping("/{id}/add-product")
+    @PostMapping("/{id}/product")
     public void addProduct(@PathVariable Long id,
                            @RequestBody Product product) {
+        userService.addProduct(id, product);
+    }
 
+    @DeleteMapping("/{id}/product/{productId}")
+    public void removeProduct(@PathVariable Long id,
+                              @PathVariable Long productId) {
+        userService.removeProduct(id, productId);
     }
 }

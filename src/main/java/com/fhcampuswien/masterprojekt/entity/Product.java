@@ -26,7 +26,7 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
-    @Column (nullable = false)
+    @Column ()
     private ProductStatus status;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
