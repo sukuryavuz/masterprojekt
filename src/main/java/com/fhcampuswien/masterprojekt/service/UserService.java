@@ -33,6 +33,10 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public Product getProduct(Long id) {
+        return productRepository.findById(id).get();
+    }
+
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).get();
     }
@@ -91,5 +95,17 @@ public class UserService {
         }
 //        if(ProductsOfUser.contains(product)) {
 //        }
+    }
+
+    public void updateProduct(Long id, Long productId, Product product) {
+        Product updatedProduct = getProduct(productId);
+        updatedProduct.setProductName(product.getProductName());
+        updatedProduct.setProductDescription(product.getProductDescription());
+        updatedProduct.setPrice(product.getPrice());
+        updatedProduct.setStatus(ProductStatus.AVAILABLE);
+
+        User user = getUser(id);
+        updatedProduct.setUser(user);
+        user.getProducts().add(updatedProduct);
     }
 }
