@@ -84,14 +84,10 @@ public class UserService {
     }
 
     public void removeProduct(Long userId, Long productId) {
-//        User user = getUser(id);
-//        List<Product> ProductsOfUser = user.getProducts();
-        if(productRepository.findById(productId).isPresent()) {
-            Product product = getProduct(productId);
-            productRepository.delete(product);
+        Optional<Product> product = productRepository.findById(productId);
+        if(product.get().getStatus().equals(ProductStatus.AVAILABLE)) {
+            productRepository.deleteByProductId(productId);
         }
-//        if(ProductsOfUser.contains(product)) {
-//        }
     }
 
     public void updateProduct(Long userId, Long productId, Product product) {
@@ -108,8 +104,10 @@ public class UserService {
 
     public void buyProduct(Long userId, Long productId) {
         Product boughtProduct = getProduct(productId);
-        boughtProduct.setStatus(ProductStatus.SOLD);
-        boughtProduct.setBoughtByUser(userId);
+        if(boughtProduct.getStatus().equals(ProductStatus.AVAILABLE)) {
+            boughtProduct.setStatus(ProductStatus.SOLD);
+            boughtProduct.setBoughtByUser(userId);
+        }
     }
 
     public List<Product> getMyBoughtProducts(Long userId) {
