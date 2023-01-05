@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -31,34 +33,46 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public void updateUser(@PathVariable Long id, @RequestBody User user) {
-        userService.updateUser(user, id);
+    @PutMapping("/{userId}")
+    public void updateUser(@PathVariable Long userId, @RequestBody User user) {
+        userService.updateUser(user, userId);
         // TODO: check if username already exists
     }
 
-    @DeleteMapping("/{id}")
-    public void removeUser(@PathVariable Long id) {
-        userService.removeUser(id);
+    @DeleteMapping("/{userId}")
+    public void removeUser(@PathVariable Long userId) {
+        userService.removeUser(userId);
     }
 
-    @PostMapping("/{id}/product")
-    public void addProduct(@PathVariable Long id,
+    @PostMapping("/{userId}/product")
+    public void addProduct(@PathVariable Long userId,
                            @RequestBody Product product) {
-        userService.addProduct(id, product);
+        userService.addProduct(userId, product);
     }
 
     // TODO: funktioniert noch nicht
-    @DeleteMapping("/{id}/product/{productId}")
-    public void removeProduct(@PathVariable Long id,
+    @DeleteMapping("/{userId}/product/{productId}")
+    public void removeProduct(@PathVariable Long userId,
                               @PathVariable Long productId) {
-        userService.removeProduct(id, productId);
+        userService.removeProduct(userId, productId);
     }
 
-    @PutMapping("/{id}/product/{productId}")
-    public void updateProduct(@PathVariable Long id,
+    @PutMapping("/{userId}/product/{productId}")
+    public void updateProduct(@PathVariable Long userId,
                               @PathVariable Long productId,
                               @RequestBody Product product) {
-        userService.updateProduct(id, productId, product);
+        userService.updateProduct(userId, productId, product);
+    }
+
+    @PostMapping("/{userId}/product/{productId}")
+    public void buyProduct(@PathVariable Long userId,
+                           @PathVariable Long productId) {
+        userService.buyProduct(userId, productId);
+    }
+
+    @GetMapping("{userId}/products")
+    public ResponseEntity<List<Product>> getMyBoughtProducts(@PathVariable Long userId) {
+        List<Product> myBoughtProducts = userService.getMyBoughtProducts(userId);
+        return new ResponseEntity<>(myBoughtProducts, HttpStatus.OK);
     }
 }

@@ -5,10 +5,7 @@ import com.fhcampuswien.masterprojekt.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,10 +31,10 @@ public class ProductController {
         return new ResponseEntity<>(availableProductList, HttpStatus.OK);
     }
 
-//    @GetMapping()
-//    public ResponseEntity<List<Product>> getAllProductsOfUser(@RequestParam String username) {
-//        List<Product> productList = productService.getAllProductsOfUser(username);
-//        return new ResponseEntity<>(productList, HttpStatus.OK);
-//    }
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Product>> getAllProductsOfUser(@PathVariable Long userId) {
+        List<Product> productList = productService.getAllProductsOfUser(userId);
+        return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
 
 }

@@ -26,8 +26,11 @@ public class Product {
     @Column(nullable = false)
     private double price;
 
-    @Column ()
+    @Column
     private ProductStatus status;
+
+    @Column
+    private Long boughtByUser;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id")

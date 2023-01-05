@@ -86,11 +86,11 @@ public class UserService {
     }
 
     // TODO: check if product to remove is assigned to this user
-    public void removeProduct(Long id, Long productId) {
+    public void removeProduct(Long userId, Long productId) {
 //        User user = getUser(id);
 //        List<Product> ProductsOfUser = user.getProducts();
         if(productRepository.findById(productId).isPresent()) {
-            Product product = productRepository.findById(productId).get();
+            Product product = getProduct(productId);
             productRepository.delete(product);
         }
 //        if(ProductsOfUser.contains(product)) {
@@ -107,5 +107,15 @@ public class UserService {
         User user = getUser(id);
         updatedProduct.setUser(user);
         user.getProducts().add(updatedProduct);
+    }
+
+    public void buyProduct(Long userId, Long productId) {
+        Product boughtProduct = getProduct(productId);
+        boughtProduct.setStatus(ProductStatus.SOLD);
+        boughtProduct.setBoughtByUser(userId);
+    }
+
+    public List<Product> getMyBoughtProducts(Long userId) {
+        return productRepository.findAllByBoughtByUser(userId);
     }
 }
