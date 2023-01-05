@@ -36,7 +36,6 @@ public class UserController {
     @PutMapping("/{userId}")
     public void updateUser(@PathVariable Long userId, @RequestBody User user) {
         userService.updateUser(user, userId);
-        // TODO: check if username already exists
     }
 
     @DeleteMapping("/{userId}")

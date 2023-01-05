@@ -54,8 +54,8 @@ public class UserService {
         return user.isPresent();
     }
 
-    public void updateUser(User user, Long id) {
-        User updatedUser = getUser(id);
+    public void updateUser(User user, Long userId) {
+        User updatedUser = getUser(userId);
         updatedUser.setFirstname(user.getFirstname());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setUsername(user.getUsername());
@@ -63,29 +63,26 @@ public class UserService {
         userRepository.save(updatedUser);
     }
 
-    // TODO: return statement if user does not exist
-    public void removeUser(Long id) {
-        User user = getUser(id);
+    public void removeUser(Long userId) {
+        User user = getUser(userId);
         if(checkIfUserExists(user.getUsername())) {
             userRepository.delete(user);
         }
     }
 
-    // TODO: check if user does not try to add product to someone else
-    public void addProduct(Long id, Product product) {
+    public void addProduct(Long userId, Product product) {
         product.setPrice(product.getPrice());
         product.setProductDescription(product.getProductDescription());
         product.setProductName(product.getProductName());
         product.setStatus(ProductStatus.AVAILABLE);
 
-        User user = getUser(id);
+        User user = getUser(userId);
         product.setUser(user);
         user.getProducts().add(product);
 
         productRepository.save(product);
     }
 
-    // TODO: check if product to remove is assigned to this user
     public void removeProduct(Long userId, Long productId) {
 //        User user = getUser(id);
 //        List<Product> ProductsOfUser = user.getProducts();
@@ -97,14 +94,14 @@ public class UserService {
 //        }
     }
 
-    public void updateProduct(Long id, Long productId, Product product) {
+    public void updateProduct(Long userId, Long productId, Product product) {
         Product updatedProduct = getProduct(productId);
         updatedProduct.setProductName(product.getProductName());
         updatedProduct.setProductDescription(product.getProductDescription());
         updatedProduct.setPrice(product.getPrice());
         updatedProduct.setStatus(ProductStatus.AVAILABLE);
 
-        User user = getUser(id);
+        User user = getUser(userId);
         updatedProduct.setUser(user);
         user.getProducts().add(updatedProduct);
     }
