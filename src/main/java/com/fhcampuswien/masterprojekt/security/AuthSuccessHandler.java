@@ -61,6 +61,6 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     response.addHeader("Content-Type", "application/json");
     response
         .getWriter()
-        .print("{\"token\": \"" + token + "\"," + "\t\"id\": \"" + user.getId() + "\"\n," + "}");
+        .print("{\"token\": \"" + token + "\"," + "\t\"id\": \"" + user.getId() + "\"\n" + "}");
   }
 }
