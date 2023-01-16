@@ -1,6 +1,5 @@
 package com.fhcampuswien.masterprojekt.service;
 
-import com.fhcampuswien.masterprojekt.Enum.ProductStatus;
 import com.fhcampuswien.masterprojekt.entity.Product;
 import com.fhcampuswien.masterprojekt.entity.User;
 import com.fhcampuswien.masterprojekt.repository.ProductRepository;
@@ -37,8 +36,8 @@ public class ProductService {
     return productRepository.findAll();
   }
 
-  public List<Product> getAvailableProducts() {
-    return productRepository.findByStatus(ProductStatus.AVAILABLE);
+  public List<Product> getAvailableProducts(Long userId) {
+    return productRepository.getAllAvailableProducts(userId);
   }
 
   public List<Product> getAllProductsOfUser(Long userId) {

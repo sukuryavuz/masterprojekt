@@ -24,9 +24,9 @@ public class ProductController {
     return new ResponseEntity<>(productList, HttpStatus.OK);
   }
 
-  @GetMapping("/available-products")
-  public ResponseEntity<List<Product>> getAvailableProducts() {
-    List<Product> availableProductList = productService.getAvailableProducts();
+  @GetMapping("/{userId}/available-products")
+  public ResponseEntity<List<Product>> getAvailableProducts(@PathVariable Long userId) {
+    List<Product> availableProductList = productService.getAvailableProducts(userId);
     return new ResponseEntity<>(availableProductList, HttpStatus.OK);
   }
 
