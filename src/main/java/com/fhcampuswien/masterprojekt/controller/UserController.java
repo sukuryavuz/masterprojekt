@@ -60,7 +60,6 @@ public class UserController {
       @RequestParam("price") double price,
       @RequestParam("file") MultipartFile file)
       throws IOException {
-    //    System.out.println("++++++++" + Arrays.toString(file.getBytes()));
     Product product = new Product();
     product.setProductName(productName);
     product.setProductDescription(productDescription);
