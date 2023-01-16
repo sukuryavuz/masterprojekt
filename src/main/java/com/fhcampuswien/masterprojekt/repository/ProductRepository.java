@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-  @Query("SELECT u FROM Product u WHERE u.status = 0 AND u.user.id != ?1")
+  @Query("SELECT u FROM Product u WHERE u.status = 0 AND u.user.id <> ?1")
   List<Product> getAllAvailableProducts(Long userId);
 
   List<Product> findAllByUser(Optional<User> user);
