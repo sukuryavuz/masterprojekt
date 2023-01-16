@@ -3,12 +3,14 @@ package com.fhcampuswien.masterprojekt.controller;
 import com.fhcampuswien.masterprojekt.entity.Product;
 import com.fhcampuswien.masterprojekt.entity.User;
 import com.fhcampuswien.masterprojekt.service.UserService;
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/user")
@@ -50,8 +52,21 @@ public class UserController {
     userService.removeUser(userId);
   }
 
-  @PostMapping("/{userId}/product")
-  public void addProduct(@PathVariable Long userId, @RequestBody Product product) {
+  @PostMapping(value = "/{userId}/product")
+  public void addProduct(
+      @PathVariable Long userId,
+      @RequestParam("productName") String productName,
+      @RequestParam("productDescription") String productDescription,
+      @RequestParam("price") double price,
+      @RequestParam("file") MultipartFile file)
+      throws IOException {
+    //    System.out.println("++++++++" + Arrays.toString(file.getBytes()));
+    Product product = new Product();
+    product.setProductName(productName);
+    product.setProductDescription(productDescription);
+    product.setPrice(price);
+    product.setFile(file.getBytes());
+
     userService.addProduct(userId, product);
   }
 

@@ -71,9 +71,6 @@ public class UserService {
   }
 
   public void addProduct(Long userId, Product product) {
-    product.setPrice(product.getPrice());
-    product.setProductDescription(product.getProductDescription());
-    product.setProductName(product.getProductName());
     product.setStatus(ProductStatus.AVAILABLE);
 
     User user = getUser(userId);

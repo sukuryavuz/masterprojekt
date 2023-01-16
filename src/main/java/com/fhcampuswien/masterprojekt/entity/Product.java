@@ -32,4 +32,6 @@ public class Product {
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "user_id")
   private User user;
+
+  @Lob @Column private byte[] file;
 }
