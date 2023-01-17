@@ -5,6 +5,7 @@ import com.fhcampuswien.masterprojekt.entity.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   List<Product> findAllByBoughtByUser(Long userId);
 
-  void deleteByProductId(Long productId);
+  @Modifying
+  @Query("DELETE FROM Product u WHERE u.productId = ?1")
+  void deleteProductById(Long productId);
 }
