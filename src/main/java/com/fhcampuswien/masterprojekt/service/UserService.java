@@ -83,7 +83,7 @@ public class UserService {
   public void removeProduct(Long userId, Long productId) {
     Optional<Product> product = productRepository.findById(productId);
     if (product.get().getStatus().equals(ProductStatus.AVAILABLE)) {
-      productRepository.deleteByProductId(productId);
+      productRepository.deleteProductById(productId);
     }
   }
 
