@@ -58,14 +58,15 @@ public class UserController {
       @RequestParam("productName") String productName,
       @RequestParam("productDescription") String productDescription,
       @RequestParam("price") double price,
-      @RequestParam("file") MultipartFile file)
+      @RequestParam(value = "file", required = false) MultipartFile file)
       throws IOException {
     Product product = new Product();
     product.setProductName(productName);
     product.setProductDescription(productDescription);
     product.setPrice(price);
-    product.setFile(file.getBytes());
-
+    if (!(file == null)) {
+      product.setFile(file.getBytes());
+    }
     userService.addProduct(userId, product);
   }
 
