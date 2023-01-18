@@ -69,7 +69,6 @@ public class UserController {
     userService.addProduct(userId, product);
   }
 
-  // TODO: funktioniert noch nicht
   @DeleteMapping("/{userId}/product/{productId}")
   public void removeProduct(@PathVariable Long userId, @PathVariable Long productId) {
     userService.removeProduct(userId, productId);
